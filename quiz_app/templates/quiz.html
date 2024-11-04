@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+    <h1>Quiz</h1>
+    <form method="POST">
+        {% for i, question in enumerate(questions) %}
+            <fieldset>
+                <legend>{{ question.question }}</legend>
+                {% for option in question.options %}
+                    <label>
+                        <input type="radio" name="question-{{ i }}" value="{{ option }}"> {{ option }}
+                    </label><br>
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
