@@ -1,0 +1,50 @@
+Route Decorator that maps URL in Flask.
+
+ANSWER:
+
+Here's an elaborate explanation of the @app.route() decorator in Flask:
+
+*What is the @app.route() decorator?*
+
+The @app.route() decorator is a Python decorator that is used to map URLs to specific functions in a Flask application. It is a way to tell Flask which function to call when a specific URL is accessed.
+
+*How does the @app.route() decorator work?*
+
+When you use the @app.route() decorator to map a URL to a function, Flask creates a route that associates the URL with the function. When a request is made to the URL, Flask calls the associated function and passes the request data to it.
+
+*Example usage of the @app.route() decorator*
+
+Here's an example of how to use the @app.route() decorator to map a URL to a function:
+
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return 'Hello, World!'
+
+@app.route('/about')
+def about():
+    return 'This is the about page.'
+
+if __name__ == '__main__':
+    app.run()
+
+In this example, the @app.route() decorator is used to map two URLs to two different functions: / is mapped to the home() function, and /about is mapped to the about() function.
+
+*Options and parameters of the @app.route() decorator*
+
+The @app.route() decorator takes several options and parameters that can be used to customize the route. Some of the most commonly used options and parameters include:
+
+- methods: a list of HTTP methods that the route should respond to (e.g. ['GET', 'POST'])
+- strict_slashes: a boolean that determines whether the route should respond to URLs with trailing slashes (e.g. True or False)
+- redirect_to: a URL that the route should redirect to (e.g. '/new-url')
+- alias: a boolean that determines whether the route should be aliased (e.g. True or False)
+
+Here's an example of how to use some of these options and parameters:
+
+@app.route('/users', methods=['GET', 'POST'], strict_slashes=False)
+def users():
+    return 'This is the users page.'
+
+In this example, the @app.route() decorator is used to map the /users URL to the users() function, and the methods option is used to specify that the route should respond to both GET and POST requests. The strict_slashes option is set to False, which means that the route will respond to URLs with trailing slashes.

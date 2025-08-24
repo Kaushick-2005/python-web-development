@@ -1,0 +1,83 @@
+git merge and git rebase.
+
+ANSWER:
+
+Here's a detailed explanation of git merge and git rebase:
+
+Git Merge
+
+git merge is a command used to integrate changes from one branch into another. It creates a new merge commit that combines the changes from both branches.
+
+Here's a step-by-step explanation of the merge process:
+
+1. Checkout the target branch: Switch to the branch where you want to integrate the changes. For example, git checkout master.
+2. Merge the source branch: Run git merge <source-branch-name>. For example, git merge feature/new-feature.
+3. Resolve conflicts (if any): If there are conflicts between the two branches, Git will pause the merge process. You'll need to resolve the conflicts manually and then commit the changes.
+4. Create a merge commit: Once the conflicts are resolved, Git will create a new merge commit that combines the changes from both branches.
+
+Types of Merges
+
+There are two types of merges:
+
+1. Fast-forward merge: If the target branch is a direct descendant of the source branch, Git will perform a fast-forward merge. This type of merge simply moves the target branch pointer to the latest commit of the source branch.
+2. True merge: If the target branch is not a direct descendant of the source branch, Git will perform a true merge. This type of merge creates a new merge commit that combines the changes from both branches.
+
+Merge Strategies
+
+Git provides several merge strategies that can be used to customize the merge process. Some common merge strategies include:
+
+1. Recursive strategy
+2. Resolve strategy
+3. Octopus strategy
+
+Merge Example
+
+Suppose we have two branches, master and feature/new-feature. The master branch has the following commits:
+
+A -> B -> C
+
+The feature/new-feature branch has the following commits:
+
+A -> D -> E
+
+This will create a new merge commit that combines the changes from both branches. The resulting commit history will look like this:
+
+A -> B -> C -> F
+
+where F is the new merge commit.
+
+
+Git Rebase
+
+git rebase is a command used to reapply commits from one branch onto another. It's an alternative to merging, and it can be used to maintain a linear commit history.
+
+Here's a step-by-step explanation of the rebase process:
+
+1. Checkout the source branch: Switch to the branch that contains the commits you want to rebase. For example, git checkout feature/new-feature.
+2. Rebase the commits: Run git rebase <target-branch-name>. For example, git rebase master.
+3. Resolve conflicts (if any): If there are conflicts between the two branches, Git will pause the rebase process. You'll need to resolve the conflicts manually and then continue the rebase process.
+4. Reapply the commits: Once the conflicts are resolved, Git will reapply the commits from the source branch onto the target branch.
+
+Types of Rebases
+
+There are two types of rebases:
+
+1. Rebase with merge: This type of rebase uses the merge strategy to reapply commits. It's the default rebase strategy used by Git.
+2. Rebase with interactive: This type of rebase uses an interactive shell to reapply commits. It allows you to edit the commit history and squash or reorder commits.
+
+Rebase Example
+
+Suppose we have two branches, master and feature/new-feature. The master branch has the following commits:
+
+A -> B -> C
+
+The feature/new-feature branch has the following commits:
+
+A -> D -> E
+
+This will reapply the commits from the feature/new-feature branch onto the master branch. The resulting commit history will look like this:
+
+A -> B -> C -> D' -> E'
+
+where D' and E' are the rebased commits.
+

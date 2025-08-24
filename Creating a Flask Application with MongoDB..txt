@@ -1,0 +1,75 @@
+Creating a Flask Application with MongoDB.
+
+ANSWER:
+
+Here's a simple example of a Flask application with MongoDB:
+
+Requirements:
+
+- Flask
+- Flask-PyMongo (a Flask extension for MongoDB)
+- MongoDB (installed and running on your local machine)
+
+Installation:
+
+
+bash
+pip install Flask Flask-PyMongo
+
+
+Code:
+
+
+from flask import Flask, jsonify, request
+from flask_pymongo import PyMongo
+
+app = Flask(__name__)
+app.config["MONGO_URI"] = "mongodb://localhost:27017/myDatabase"
+mongo = PyMongo(app)
+
+@app.route('/users', methods=['GET'])
+def get_users():
+    users = mongo.db.users.find()
+    output = []
+    for user in users:
+        output.append({'name': user['name'], 'email': user['email']})
+    return jsonify({'users': output})
+
+@app.route('/users', methods=['POST'])
+def create_user():
+    new_user = {
+        'name': request.json['name'],
+        'email': request.json['email']
+    }
+    mongo.db.users.insert_one(new_user)
+    return jsonify({'message': 'User created successfully'}), 201
+
+@app.route('/users/<username>', methods=['GET'])
+def get_user(username):
+    user = mongo.db.users.find_one({'name': username})
+    if user:
+        output = {'name': user['name'], 'email': user['email']}
+        return jsonify({'user': output})
+    else:
+        return jsonify({'message': 'User not found'}), 404
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+Explanation:
+
+This code creates a Flask application that interacts with a MongoDB database. The application has three routes:
+
+1. GET /users: Retrieves a list of all users in the database.
+2. POST /users: Creates a new user in the database.
+3. GET /users/<username>: Retrieves a specific user by their username.
+
+The application uses the Flask-PyMongo extension to interact with the MongoDB database.
+
+Running the Application:
+
+1. Save the code in a file named (link unavailable).
+2. Install the required dependencies using pip install Flask Flask-PyMongo.
+3. Run the application using python (link unavailable).
+

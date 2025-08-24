@@ -1,0 +1,43 @@
+mapping classes to MongoDB
+
+ANSWER:
+
+In Python, you can map classes to MongoDB using the MongoEngine library. Here's an example:
+
+Step 1: Install MongoEngine
+
+pip install mongoengine
+
+Step 2: Define your MongoDB connection
+
+from mongoengine import connect
+
+connect('mydatabase', host='localhost', port=27017)
+
+Step 3: Define your class
+
+from mongoengine import Document, StringField, IntField
+
+class User(Document):
+    name = StringField(required=True)
+    email = StringField(required=True, unique=True)
+    age = IntField(required=True)
+
+In this example, we define a User class that inherits from Document. We define three fields: name, email, and age, each with its own data type and constraints.
+
+Step 4: Create a new document
+
+user = User(name='John Doe', email='john@example.com', age=30)
+user.save()
+
+This code creates a new User document and saves it to the MongoDB database.
+
+Step 5: Query the database
+
+users = User.objects()
+for user in users:
+    print(user.name, user.email, user.age)
+
+This code queries the MongoDB database for all User documents and prints their names, emails, and ages.
+
+That's it! With MongoEngine, you can easily map Python classes to MongoDB documents and perform CRUD (create, read, update, delete) operations on them.

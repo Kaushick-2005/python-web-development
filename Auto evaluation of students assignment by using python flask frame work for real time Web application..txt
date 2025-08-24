@@ -1,0 +1,57 @@
+Auto evaluation of students assignment by using python flask frame work for real time Web application.
+
+
+ANSWER:
+Here's a high-level overview of how you can create an auto-evaluation system for students' assignments using Python Flask framework for a real-time web application:
+
+System Requirements
+
+- Python 3.8+
+- Flask 2.0+
+- Flask-SQLAlchemy for database management
+- Flask-Login for user authentication
+- Flask-WTF for form handling
+- Python libraries for specific assignment types (e.g., ast for Python code analysis)
+
+System Design
+
+1. Database Design:
+    - Create a database schema using Flask-SQLAlchemy to store assignments, students, and evaluation results.
+    - Define models for Assignment, Student, and EvaluationResult.
+2. Assignment Submission:
+    - Create a Flask route for students to submit their assignments.
+    - Use Flask-WTF to handle form data and validate submissions.
+    - Store the submitted assignment in the database.
+3. Auto-Evaluation:
+    - Create a Flask route for auto-evaluation of submitted assignments.
+    - Use Python libraries specific to the assignment type (e.g., ast for Python code analysis) to evaluate the submission.
+    - Store the evaluation result in the database.
+4. Real-time Feedback:
+    - Use Flask-SocketIO to establish real-time communication between the client and server.
+    - Send the evaluation result to the client as soon as it's available.
+5. User Authentication:
+    - Use Flask-Login to handle user authentication.
+    - Require students to log in before submitting assignments.
+
+
+1. Create a Flask app with a MongoDB database.
+2. Design a form for students to submit assignments.
+3. Evaluate the submitted code using a library like ast.
+4. Store the evaluation results in the database.
+5. Display the results in real-time using JavaScript and AJAX.
+
+Example Code
+
+from flask import Flask, request, jsonify
+from flask_pymongo import PyMongo
+
+app = Flask(__name__)
+app.config["MONGO_URI"] = "mongodb://localhost:27017/assignment_db"
+mongo = PyMongo(app)
+
+@app.route('/submit_assignment', methods=['POST'])
+def submit_assignment():
+    
+    return jsonify({'result': 'Correct'})
+
+This simplified version focuses on the core idea of creating an auto-evaluation system using Flask and MongoDB.

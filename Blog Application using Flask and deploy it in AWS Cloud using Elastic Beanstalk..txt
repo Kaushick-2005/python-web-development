@@ -1,0 +1,133 @@
+Blog Application using Flask and deploy it in AWS Cloud using Elastic Beanstalk.
+
+ANSWER:
+
+Here is a step-by-step guide to creating a blog application using Flask and deploying it to AWS Cloud using Elastic Beanstalk:
+
+Step 1: Create a new Flask project
+
+Create a new directory for your project and navigate to it in your terminal/command prompt. Then, run the following command to create a new Flask project:
+
+bash
+flask new blog_app
+
+Step 2: Install required dependencies
+
+Navigate to the blog_app directory and install the required dependencies:
+
+bash
+pip install flask flask-sqlalchemy
+
+Step 3: Create the database models
+
+Create a new file called (link unavailable) in the blog_app directory and add the following code:
+
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy(app)
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+
+Step 4: Create the routes
+
+Create a new file called (link unavailable) in the blog_app directory and add the following code:
+
+from flask import render_template, request, redirect, url_for
+from models import Post
+
+@app.route("/")
+def index():
+    posts = Post.query.all()
+    return render_template("index.html", posts=posts)
+
+@app.route("/post", methods=["GET", "POST"])
+def post():
+    if request.method == "POST":
+        title = request.form["title"]
+        content = request.form["content"]
+        post = Post(title=title, content=content)
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for("index"))
+    return render_template("post.html")
+
+Step 5: Create the templates
+
+Create a new directory called templates in the blog_app directory and add the following files:
+
+- index.html
+- post.html
+
+Add the following code to index.html:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+</head>
+<body>
+    <h1>Blog</h1>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.content }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+Add the following code to post.html:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post</title>
+</head>
+<body>
+    <h1>Post</h1>
+    <form method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title"><br><br>
+        <label for="content">Content:</label>
+        <textarea id="content" name="content"></textarea><br><br>
+        <input type="submit" value="Post">
+    </form>
+</body>
+</html>
+
+Step 6: Deploy to AWS Cloud using Elastic Beanstalk
+
+Create a new file called requirements.txt in the blog_app directory and add the following code:
+
+flask
+flask-sqlalchemy
+
+Create a new file called .ebextensions/environment.config in the blog_app directory and add the following code:
+
+option_settings:
+  aws:elasticbeanstalk:container:python:
+    WSGIPath: (link unavailable)
+
+Create a new file called (link unavailable) in the blog_app directory and add the following code:
+
+from blog_app import app
+
+if __name__ == "__main__":
+    app.run()
+
+Zip the blog_app directory and upload it to Elastic Beanstalk.
+
+Step 7: Configure Elastic Beanstalk
+
+Configure the Elastic Beanstalk environment to use the (link unavailable) file as the entry point.
+
+Step 8: Deploy the application
+
+Deploy the application to Elastic Beanstalk.
+
+That's it! Your blog application is now live on AWS Cloud using Elastic Beanstalk.
